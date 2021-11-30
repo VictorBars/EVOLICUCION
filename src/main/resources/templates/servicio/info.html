@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all">
+	
+	
+<head th:replace="layout/layout :: head"></head>
+<style>
+.active:focus {
+	background: #f834a1 !important;
+}
+</style>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<hr>
+	<hr>
+	<hr>
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Page Heading -->
+		<h1 class="my-4">Seleccionar Horario</h1>
+		
+		<div th:if="${dangerRegister}" class="alert alert-danger" role="alert">
+  			<span th:text="${dangerRegister}"></span>
+		</div>
+		
+		<div th:if="${citacompletada}" class="alert alert-danger" role="alert">
+  					<span th:text="${citacompletada}"></span>
+				</div>
+		<!-- Project One -->
+		<div class="row">
+			<div class="col-md-7">
+				<a href="#"> <img class="img-fluid rounded mb-3 mb-md-0"
+					th:src="${servicio.banner}" alt="">
+				</a>
+			</div>
+			<div class="col-md-5">
+				<h3 class="card-title">
+					<a th:text="${servicio.nombre}" href="#">Project One</a>
+				</h3>
+				
+
+				<form th:action="@{/servicio/save}" th:object="${cita}"	method="post">
+					<div class="form-row">
+
+						<div class="form-group md-5">
+							<label for="from">Fecha: </label> 
+							<input type="date" id="from" name="from" required class="form-control" th:field="*{fecha}" th:errorclass="'form-control alert-danger'"/>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+
+					</div>
+					
+					
+					
+					
+					<div class="input-group mb-3">
+						<p sec:authorize="hasRole('ROLE_ADMIN' )" >Nombres: <span   th:text = "${usuario.nombres}" ></span></p> 
+					</div>
+					
+					<div class="form-group md-3">
+							<!--<label for="fecha">Codigo </label> <input type="text"
+								class="form-control" placeholder="#" th:field="*{codigo}"> -->
+								
+								<label for="duracion">Entrenador</label>
+								<label	th:field="*{servicio.Trabajador}" class="form-control" style="width: 450px;">
+									<label th:text="${servicio.Trabajador.nombre}" readonly></label>
+								</label>
+	
+							<!--<label for="fecha">Codigo </label> <input type="text"
+								class="form-control" placeholder="#" th:field="*{codigo}"> -->
+								
+								<label for="duracion">Horario    </label> <span class="input-group-addon"></span>
+								<label th:field="*{servicio.Horario}" class="form-control" >
+									<option th:text="${servicio.Horario.descripcion}" readonly></option>
+								</label>
+								
+								<h5>Aforo: <span   th:text = "${servicio.aforo}" ></span></h5>
+								<br>
+						</div>
+						
+						
+					
+							<hr>
+							<h4 class="label info">
+							<label class="text-black-50"> S/</label> <label
+							th:text="${servicio.precio}" class="text-black-50"></label> <label
+							class="text-black-50" style="margin-left: -8px">0</label>
+							</h4>
+					
+					<!--<div sec:authorize="hasRole('ROLE_ADMIN' )"  class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">Tus Tarjetas</label>
+						</div>
+						<select
+							th:field="*{Tarjeta}" class="custom-select">
+							<option th:each="tar: ${tarjeta}" th:value="${tar.codigo}"
+								th:text="${tar.numero}"></option>
+						</select>
+					</div>-->
+					
+					
+					
+					
+					<button class="btn btn-lg btn-primary btn-block text-uppercase"
+						type="submit"  >
+						 ANADIR A CITAS </button>
+					<a th:href="@{ /servicio }" class="btn btn-lg btn-danger btn-block text-uppercase"
+						>Cancelar</a>
+				</form>
+
+
+
+
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<hr>
+		<!-- Pagination -->
+
+	</div>
+	<!-- /.container -->
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

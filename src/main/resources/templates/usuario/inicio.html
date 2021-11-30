@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<hr>
+	<hr>
+	<hr>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Page Heading -->
+		<h1 class="my-4">Lista Usuarios</h1>
+		
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre y Apellidos</th>
+					<th scope="col">dni</th>
+					<th scope="col">Correo </th>
+					<th scope="col">Usuario </th>
+
+				</tr>
+			</thead>
+			<tbody  th:each="t: ${usuarios}" >
+				<tr>
+					<th scope="row" th:text="${t.id}">1</th>
+					<td th:text="${t.nombres}+' '+${t.apellidos}">Mark</td>
+					<td th:text="${t.dni}">Mark</td>
+					<td th:text="${t.correo}">Mark</td>
+					<td th:text="${t.username}">Mark</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<p align="center">
+			<a  th:href="@{/usuario/register}" class="btn btn-info"> <i class="fas fa-calendar-alt"></i> Registrar usuario</a> 
+				<a th:href="@{ / }"class="btn btn-danger"> <i class="fas fa-undo"></i> Cancelar
+			</a>
+		</p>
+	
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
